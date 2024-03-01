@@ -1,7 +1,7 @@
 <Project>
   <!-- the assembly and package version baked in to our assets -->
   <PropertyGroup>
-    <RetailVersion>1.0.0</RetailVersion>
+    <RetailVersion>1.0.1</RetailVersion>
   </PropertyGroup>
 
   <PropertyGroup>
