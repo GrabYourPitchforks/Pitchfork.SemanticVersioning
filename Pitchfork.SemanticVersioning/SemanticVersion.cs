@@ -158,6 +158,21 @@ namespace Pitchfork.SemanticVersioning
         {
         }
 
+        /// <summary>
+        /// Creates a <see cref="SemanticVersion"/> instance from its individual components.
+        /// </summary>
+        /// <param name="major">The major version of this SemVer instance.</param>
+        /// <param name="minor">The minor version of this SemVer instance.</param>
+        /// <param name="patch">The patch version of this SemVer instance.</param>
+        /// <param name="prerelease">An optional prerelease string for this SemVer instance.</param>
+        /// <param name="build">An optional build string for this SemVer instance.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="major"/>, <paramref name="minor"/>, or <paramref name="patch"/> is negative.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="prerelease"/> is non-empty but is not a valid prerelease metadata string; or
+        /// <paramref name="build"/> is non-empty but is not a valid build metadata string.
+        /// </exception>
         public SemanticVersion(int major, int minor, int patch, string? prerelease = null, string? build = null)
         {
             if (major < 0)
@@ -308,7 +323,6 @@ namespace Pitchfork.SemanticVersioning
         /// the newly created <see cref="Version"/> instance will have the value <em>1.2.3</em>, and the
         /// <see cref="Version.Revision"/> property will have the value <em>-1</em>.
         /// </remarks>
-        /// <seealso cref="IsCoreVersion"/>
         /// <seealso cref="TryToSystemVersion"/>
         public Version ToSystemVersion()
         {
@@ -343,7 +357,6 @@ namespace Pitchfork.SemanticVersioning
         /// This method does not throw an exception on failure.
         /// </para>
         /// </remarks>
-        /// <seealso cref="IsCoreVersion"/>
         /// <seealso cref="ToSystemVersion"/>
         public bool TryToSystemVersion([NotNullWhen(true)] out Version? result)
         {

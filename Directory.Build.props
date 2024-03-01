@@ -1,6 +1,33 @@
 <Project>
-	<!-- the assembly and package version baked in to our assets -->
-	<PropertyGroup>
-		<RetailVersion>1.0.0</RetailVersion>
-	</PropertyGroup>
+  <!-- the assembly and package version baked in to our assets -->
+  <PropertyGroup>
+    <RetailVersion>1.0.0</RetailVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsRetailAssembly>False</IsRetailAssembly>
+    <IsRetailAssembly Condition="$(MSBuildProjectName.StartsWith('Pitchfork.')) AND !$(MSBuildProjectName.EndsWith('.Tests'))">True</IsRetailAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsRetailAssembly)">
+    <Version>$(RetailVersion)</Version>
+
+    <!-- Only modern .NET contains nullable annotations at the API surface; suppress all
+		     downlevel warnings but allow our own annotations to be generated. -->
+    <Nullable>enable</Nullable>
+    <Nullable Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">annotations</Nullable>
+
+    <!-- other common settings -->
+    <HighEntropyVA>true</HighEntropyVA>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- assembly strong name signing -->
+    <SignAssembly>True</SignAssembly>
+    <ActualSigningKeyFile>$(MSBuildThisFileDirectory)IdentityKey.snk</ActualSigningKeyFile>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)IdentityPubKey.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>True</DelaySign>
+  </PropertyGroup>
 </Project>

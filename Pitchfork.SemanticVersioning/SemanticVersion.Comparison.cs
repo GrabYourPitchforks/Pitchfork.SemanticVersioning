@@ -62,7 +62,7 @@ namespace Pitchfork.SemanticVersioning
         /// to the current <see cref="SemanticVersion"/>.
         /// </summary>
         /// <param name="other">The object to compare.</param>
-        /// <returns><see langword="true"/> if the two objects are equal; otherwise, <see langword="false"/>.<returns>
+        /// <returns><see langword="true"/> if the two objects are equal; otherwise, <see langword="false"/>.</returns>
         public bool Equals(SemanticVersion? other) => other is not null && this._versionString == other._versionString;
 
         /// <summary>
